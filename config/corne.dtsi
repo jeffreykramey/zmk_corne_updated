@@ -34,8 +34,11 @@ quick-tap-ms = <125>;
 bindings = <&kp TILDE>, <&kp GRAVE>;
 )
 
-//
-
+// comment tap: / | double-tap:
+ZMK_BEHAVIOR(ss_cw, tap_dance,
+tapping-term-ms = <200>;
+bindings = <&kp FSLH>, <&kp RG(SLASH)>;
+)
 
 // combos
 
