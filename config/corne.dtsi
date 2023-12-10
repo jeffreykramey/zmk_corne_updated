@@ -31,8 +31,10 @@ ZMK_BEHAVIOR(tilde, hold_tap,
 flavor = "balanced";
 tapping-term-ms = <200>;
 quick-tap-ms = <125>;
-bindings = <&kp>, <&kp>;
+bindings = <&kp TILDE>, <&kp GRAVE>;
 )
+
+//
 
 
 // combos
