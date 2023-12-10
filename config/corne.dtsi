@@ -70,6 +70,8 @@ ZMK_COMBO(caps_word, &caps_word, LM1 RM1, NUM)
 //ZMK_COMBO(bt_mac, &bt BT_SEL 1, RM4 RM5, NUM)
 //ZMK_COMBO(bt_clear, &bt BT_CLR, LT5 LT4, NUM)
 ZMK_COMBO(screen_cap, &kp LS(LG(NUMBER_4)), LT5 RT4, DEF)
+ZMK_COMBO(copy,  &kp LG(C), LM3 LM2, ALL)
+ZMK_COMBO(paste, &kp LG(V), LM2 LM1, ALL)
 
 
 
