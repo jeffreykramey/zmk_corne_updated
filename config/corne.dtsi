@@ -57,7 +57,14 @@ tapping-term-ms = <200>;
 bindings = <&kp FSLH>, <&kp RG(SLASH)>;
 )
 
+ZMK_BEHAVIOR(col_eq, macro,
+wait-ms = <100>;
+tap-ms = <5>;
+bindings = <&kp COLON &kp EQUAL>;
+)
+
 // combos
+ZMK_COMBO(go_eq,  &col_eq, RH1 RH2, DEF)
 
 
 /* keymap */
