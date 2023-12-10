@@ -1,5 +1,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
 
 #include "../zmk-nodefree-config/helper.h"
 #include "../zmk-nodefree-config/keypos_def/keypos_42keys.h"
@@ -22,7 +23,7 @@
 
 /* custom behaviors */
 
-// homerow mods
+// homerow mod left
 ZMK_BEHAVIOR(hml, hold_tap,
 flavor = "balanced";
 tapping-term-ms = <200>;
@@ -33,6 +34,7 @@ hold-trigger-key-positions = <KEYS_R THUMBS>;
 hold-trigger-on-release;             // delay positional check until key-release
 )
 
+// homerow mod right
 ZMK_BEHAVIOR(hmr, hold_tap,
 flavor = "balanced";
 tapping-term-ms = <200>;
@@ -74,9 +76,9 @@ bindings = <&kp COLON &kp EQUAL>;
 // combos
 ZMK_COMBO(go_eq,  &col_eq, RH1 RH2, DEF)
 ZMK_COMBO(caps_word, &caps_word, LM1 RM1, NUM)
-//ZMK_COMBO(bt_windows, &bt BT_SEL 0, RT4 RT5, NUM)
-//ZMK_COMBO(bt_mac, &bt BT_SEL 1, RM4 RM5, NUM)
-//ZMK_COMBO(bt_clear, &bt BT_CLR, LT5 LT4, NUM)
+ZMK_COMBO(bt_windows, &bt BT_SEL 0, RT4 RT5, NUM)
+ZMK_COMBO(bt_mac, &bt BT_SEL 1, RM4 RM5, NUM)
+ZMK_COMBO(bt_clear, &bt BT_CLR, LT5 LT4, NUM)
 ZMK_COMBO(screen_cap, &kp LS(LG(NUMBER_4)), LT5 RT4, DEF)
 ZMK_COMBO(copy,  &kp LG(C), LM3 LM2, ALL)
 ZMK_COMBO(paste, &kp LG(V), LM2 LM1, ALL)
@@ -110,7 +112,7 @@ ZMK_LAYER(default_layer,
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
     &kp ESC       &kp Q         &kp W         &kp E         &kp R         &kp T             &kp Y         &kp U         &kp I         &kp O         &kp P         AS(MINUS)
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &none         &hml LALT A   &hml LCTRL S  &hml LSHIFT D &hml LGUI F   &kp G             &kp H         &hmr RGUI J   &hmr RSHIFT K &hmr RCTRL L  &hmr RALT SEMI &kp APOS
+    &none         &hml LALT A   &hml LCTRL S  &hml LSHIFT D &hml LGUI F   &kp G             &kp H         &hmr RGUI J   &hmr RSHIFT K &hmr RCTRL L  &hmr RALT SEMI AS(APOS)
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┤
     &none         &kp Z         &kp X         &kp C         &kp V         &kp B             &kp N         &kp M         &kp COMMA     &kp DOT       &cmnt      &kp BSLH
 // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
@@ -120,11 +122,11 @@ ZMK_LAYER(default_layer,
 
 ZMK_LAYER(nav_layer,
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-    &mt TLD GRV   &none         &kp HOME      &kp UP        &kp END       &kp LBKT          &kp RBKT      &none         &none         &none         &none         &bt BT_SEL 0
+    &mt TLD GRV   &none         &kp HOME      &kp UP        &kp END       &kp LBKT          &kp RBKT      &none         &none         &none         &none         &none
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &kp F2        &none         &kp LEFT      &kp DOWN      &kp RIGHT     &kp LPAR          &kp RPAR      &hmr RGUI PG_DN &hmr RSHIFT PG_UP &trans  &trans        &bt BT_SEL 1
+    &kp F2        &none         &kp LEFT      &kp DOWN      &kp RIGHT     &kp LPAR          &kp RPAR      &hmr RGUI PG_DN &hmr RSHIFT PG_UP &trans  &trans        &none
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &kp LS(F6)    &trans        &trans        &trans        &trans        &kp LBRC          &kp RBRC      &trans        &trans        &trans        &trans        &bt BT_CLR
+    &kp LS(F6)    &trans        &trans        &trans        &trans        &kp LBRC          &kp RBRC      &trans        &trans        &trans        &trans        &none
 // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
                                 ___           ___           ___               ___           ___           ___
 //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
