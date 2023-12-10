@@ -21,28 +21,17 @@
 // homerow mods
 ZMK_BEHAVIOR(hrm, hold_tap,
 flavor = "balanced";
-tapping-term-ms = <280>;
+tapping-term-ms = <200>;
 quick-tap-ms = <125>;
 bindings = <&kp>, <&kp>;
 )
 
-// tap: sticky shift | double tap: capsword
-ZMK_BEHAVIOR(ss_cw, tap_dance,
+// tap: ` | hold: ~
+ZMK_BEHAVIOR(tilde, hold_tap,
+flavor = "balanced";
 tapping-term-ms = <200>;
-bindings = <&sk LSHFT>, <&caps_word>;
-)
-
-// tap: backspace | shift + tap: delete | hold: num layer
-ZMK_BEHAVIOR(bs_del_num, mod_morph,
-bindings = <&lt NUM BSPC>, <&kp DEL>;
-mods = <(MOD_LSFT|MOD_RSFT)>;
-)
-
-// windows sleep macro
-ZMK_BEHAVIOR(win_sleep, macro,
-wait-ms = <100>;
-tap-ms = <5>;
-bindings = <&kp LG(X) &kp U &kp S>;
+quick-tap-ms = <125>;
+bindings = <&kp>, <&kp>;
 )
 
 
@@ -65,7 +54,7 @@ ZMK_LAYER(default_layer,
 
 ZMK_LAYER(nav_layer,
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-&mt TILDE GRAVE   &none         &kp HOME      &kp UP        &kp END       &kp LBKT          &kp RBKT      &none         &none         &none         &none         &none
+    &tilde        &none         &kp HOME      &kp UP        &kp END       &kp LBKT          &kp RBKT      &none         &none         &none         &none         &none
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &none         &none         &kp LEFT      &kp DOWN      &kp RIGHT     &kp LPAR          &kp RPAR      &hrm RGUI PG_DN &hrm RSHIFT PG_UP &trans  &trans        &trans
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
@@ -77,7 +66,7 @@ ZMK_LAYER(nav_layer,
 
 ZMK_LAYER(num_layer,
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-&mt TILDE GRAVE   &kp EXCL      &kp AT        &kp HASH      &kp DLLR      &kp PRCNT         &kp CARET     &kp AMPS      &kp STAR      &kp LPAR      &kp RPAR      &none
+    &tilde        &kp EXCL      &kp AT        &kp HASH      &kp DLLR      &kp PRCNT         &kp CARET     &kp AMPS      &kp STAR      &kp LPAR      &kp RPAR      &none
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &none         &kp N1        &kp N2        &kp N3        &kp N4        &kp N5            &kp N6        &kp N7        &kp N8        &kp N9        &kp N0        &none
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┤
