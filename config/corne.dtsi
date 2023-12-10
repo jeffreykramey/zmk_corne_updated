@@ -65,6 +65,8 @@ bindings = <&kp COLON &kp EQUAL>;
 
 // combos
 ZMK_COMBO(go_eq,  &col_eq, RH1 RH2, DEF)
+ZMK_COMBO(caps_word, &caps_word, LM4 RM4, DEF)
+
 
 
 /* keymap */
