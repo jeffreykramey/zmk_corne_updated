@@ -64,12 +64,6 @@ tapping-term-ms = <200>;
 bindings = <&kp FSLH>, <&kp RG(SLASH)>;
 )
 
-// backspace tap: backspace | double-tap:
-ZMK_BEHAVIOR(bk, tap_dance,
-tapping-term-ms = <200>;
-bindings = <&lt NAV BSPC>, <&key_repeat BSPC>;
-)
-
 // := macro
 ZMK_BEHAVIOR(col_eq, macro,
 wait-ms = <100>;
@@ -95,9 +89,9 @@ ZMK_LAYER(home,
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &none         &hml LCTRL A  &hml LALT S   &hml LSHIFT D &hml LGUI F   &kp G             &kp H         &hmr RGUI J   &hmr RSHIFT K &hmr RALT L   &hmr RCTRL SEMI AS(APOS)
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┤
-    &kp LSHIFT    &kp Z         &kp X         &kp C         &kp V         &kp B             &kp N         &kp M         &kp COMMA     &kp DOT       &cmnt      &kp BSLH
+    &none       &kp Z         &kp X         &kp C         &kp V         &kp B             &kp N         &kp M         &kp COMMA     &kp DOT       &cmnt      &kp BSLH
 // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-                                              &kp DEL       &bk           &lt NUM SPACE     &lt NUM RET   &lt NAV TAB   &kp EQUAL
+                                              &kp DEL       &lt NAV BSPC  &lt NUM SPACE     &lt NUM RET   &lt NAV TAB   &kp EQUAL
 //                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
 )
 
