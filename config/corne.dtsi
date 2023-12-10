@@ -1,52 +1,119 @@
-
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include "../zmk-nodefree-config/helper.h"
+#include "../zmk-nodefree-config/keypos_def/keypos_42keys.h"
 
-/ {
-        keymap {
-                compatible = "zmk,keymap";
+/* layer and key shortcuts */
+#define ___ &trans
+#define DEF 0
+#define NAV 1
+#define NUM 2
+#define TLD TILDE
+#define GRV GRAVE
+#define hr_dn RGUI PG_DN
+#define hr_up RSHIFT PG_UP
+#define AS(keycode) &as LS(keycode) keycode // Autoshift Macro
+#define KEYS_L LT0 LT1 LT2 LT3 LT4 LT5 LM0 LM1 LM2 LM3 LM4 LM5 LB0 LB1 LB2 LB3 LB4 LB5  // left-hand keys
+#define KEYS_R RT0 RT1 RT2 RT3 RT4 RT5 RM0 RM1 RM2 RM3 RM4 RM5 RB0 RB1 RB2 RB3 RB4 RB5  // right-hand keys
+#define THUMBS LH2 LH1 LH0 RH0 RH1 RH2                                                  // thumb keys
 
-                default_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
-// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-//                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
-                        bindings = <
-   &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-   &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-                  &kp LGUI &mo 1 &kp SPACE   &kp RET &mo 2 &kp RALT
-                        >;
-                };
-                lower_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp TAB    &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-   &kp LSHFT  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
-                                    &kp LGUI     &trans       &kp SPACE      &kp RET  &trans   &kp RALT
-                        >;
-                };
+/* custom behaviors */
 
-                raise_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-// | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp BSPC
-   &kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp BSLH &kp GRAVE
-   &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC        &kp RBRC &kp PIPE &kp TILDE
-                             &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
-                        >;
-                };
-        };
-};
+// homerow mod left
+ZMK_BEHAVIOR(hml, hold_tap,
+flavor = "balanced";
+tapping-term-ms = <200>;
+quick-tap-ms = <165>;                // repeat on tap-into-hold
+require-prior-idle-ms = <150>;
+bindings = <&kp>, <&kp>;
+hold-trigger-key-positions = <KEYS_R THUMBS>;
+hold-trigger-on-release;             // delay positional check until key-release
+)
+
+// homerow mod right
+ZMK_BEHAVIOR(hmr, hold_tap,
+flavor = "balanced";
+tapping-term-ms = <200>;
+quick-tap-ms = <165>;                // repeat on tap-into-hold
+require-prior-idle-ms = <150>;
+bindings = <&kp>, <&kp>;
+hold-trigger-key-positions = <KEYS_L THUMBS>;
+hold-trigger-on-release;             // delay positional check until key-release
+)
+
+// auto-shift
+ZMK_BEHAVIOR(as, hold_tap,
+flavor = "tap-preferred";
+tapping-term-ms = <175>;
+quick-tap-ms = <0>;
+bindings = <&kp>, <&kp>;
+)
+
+// layer toggle w/ repeat
+ZMK_BEHAVIOR(lt_rpt, layer_tap,
+flavor = "tap-preferred";
+tapping-term-ms = <175>;
+quick-tap-ms = <0>;
+bindings = <&kp>, <&kp>;
+)
+
+// comment tap: / | double-tap:
+ZMK_BEHAVIOR(cmnt, tap_dance,
+tapping-term-ms = <200>;
+bindings = <&kp FSLH>, <&kp RG(SLASH)>;
+)
+
+ZMK_BEHAVIOR(col_eq, macro,
+wait-ms = <100>;
+tap-ms = <5>;
+bindings = <&kp COLON &kp EQUAL>;
+)
+
+// combos
+ZMK_COMBO(go_eq,  &col_eq, RH1 RH2, DEF)
+ZMK_COMBO(caps_word, &caps_word, LM1 RM1, NUM)
+ZMK_COMBO(bt_windows, &bt BT_SEL 0, RT4 RT5, NUM)
+ZMK_COMBO(bt_mac, &bt BT_SEL 1, RM4 RM5, NUM)
+ZMK_COMBO(bt_clear, &bt BT_CLR, LT5 LT4, NUM)
+ZMK_COMBO(screen_cap, &kp LS(LG(NUMBER_4)), LT5 RT4, DEF)
+ZMK_COMBO(copy,  &kp LG(C), LM3 LM2, ALL)
+ZMK_COMBO(paste, &kp LG(V), LM2 LM1, ALL)
+
+/* keymap */
+
+ZMK_LAYER(default_layer,
+// ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+    &kp ESC       &kp Q         &kp W         &kp E         &kp R         &kp T             &kp Y         &kp U         &kp I         &kp O         &kp P         AS(MINUS)
+// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+    &none         &hml LCTRL A  &hml LALT S   &hml LSHIFT D &hml LGUI F   &kp G             &kp H         &hmr RGUI J   &hmr RSHIFT K &hmr RALT L   &hmr RCTRL SEMI AS(APOS)
+// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┤
+    &none         &kp Z         &kp X         &kp C         &kp V         &kp B             &kp N         &kp M         &kp COMMA     &kp DOT       &cmnt      &kp BSLH
+// ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                              &kp DEL       &lt NAV BSPC  &lt NUM SPACE     &lt NUM RET   &lt NAV TAB   &kp EQUAL
+//                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+)
+
+ZMK_LAYER(nav_layer,
+// ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+    &mt TLD GRV   &none         &kp HOME      &kp UP        &kp END       &kp LBKT          &kp RBKT      &none         &none         &none         &none         &none
+// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+    &kp F2        &none         &kp LEFT      &kp DOWN      &kp RIGHT     &kp LPAR          &kp RPAR      &hmr hr_dn    &hmr hr_up    &trans        &trans        &none
+// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+    &kp LS(F6)    &trans        &trans        &trans        &trans        &kp LBRC          &kp RBRC      &trans        &trans        &trans        &trans        &none
+// ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                              ___           ___           ___               ___           ___           ___
+//                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+)
+
+ZMK_LAYER(num_layer,
+// ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+    &mt TLD GRV   &kp EXCL      &kp AT        &kp HASH      &kp DLLR      &kp PRCNT         &kp CARET     &kp AMPS      &kp STAR      &kp LPAR      &kp RPAR      &none
+// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+    &kp F2        AS(N1)        AS(N2)        AS(N3)        AS(N4)        AS(N5)            AS(N6)        AS(N7)        AS(N8)        AS(N9)        AS(N0)        &none
+// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┤
+    &kp LS(F6)    &none         &none         &none         &none         &none             &none         &none         &none         &none         &none         &none
+// ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                              ___           ___           ___               ___           ___           ___
+//                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+)
