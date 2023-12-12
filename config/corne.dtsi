@@ -74,8 +74,10 @@ bindings = <&kp COLON &kp EQUAL>;
 // combos
 ZMK_COMBO(go_eq,  &col_eq, RH1 RH2, DEF)
 ZMK_COMBO(caps_word, &caps_word, LM1 RM1, DEF)
-ZMK_COMBO(screen_cap, &kp LS(LG(NUMBER_4)), LT5 RT4, DEF)
-ZMK_COMBO(copy,  &kp LG(C), LM3 LM2, ALL)
+ZMK_COMBO(screen_cap, &kp LS(LG(NUMBER_4)), LT5 RT5, DEF)
+ZMK_COMBO(copy, &kp LG(z), LM1 LM0, ALL)
+ZMK_COMBO(copy, &kp LG(LS(z)), LT1 LT0, ALL)
+ZMK_COMBO(copy, &kp LG(C), LM3 LM2, ALL)
 ZMK_COMBO(paste, &kp LG(V), LM2 LM1, ALL)
 ZMK_COMBO(bt_windows, &bt BT_SEL 0, RT3 RT4 RT5, ALL)
 ZMK_COMBO(bt_mac, &bt BT_SEL 1, RM3 RM4 RM5, ALL)
@@ -99,7 +101,7 @@ ZMK_LAYER(nav,
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
     &mt TLD GRV   &none         &kp HOME      &kp UP        &kp END       &kp LBKT          &kp RBKT      &none         &none         &none         &none         &none
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &kp F2        &none         &kp LEFT      &kp DOWN      &kp RIGHT     &kp LPAR          &kp RPAR      &hmr hr_dn    &hmr hr_up    &trans        &trans        &none
+    &kp F2        &LSHIFT       &kp LEFT      &kp DOWN      &kp RIGHT     &kp LPAR          &kp RPAR      &hmr hr_dn    &hmr hr_up    &trans        &trans        &none
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &kp LS(F6)    &trans        &trans        &trans        &trans        &kp LBRC          &kp RBRC      &trans        &trans        &trans        &trans        &none
 // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
