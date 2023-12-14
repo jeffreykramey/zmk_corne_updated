@@ -64,11 +64,34 @@ tapping-term-ms = <200>;
 bindings = <&kp FSLH>, <&kp RG(SLASH)>;
 )
 
-// := macro
+/* macros */
+
+// :=
 ZMK_BEHAVIOR(col_eq, macro,
 wait-ms = <100>;
 tap-ms = <5>;
 bindings = <&kp COLON &kp EQUAL>;
+)
+
+// ()
+ZMK_BEHAVIOR(par, macro,
+wait-ms = <100>;
+tap-ms = <5>;
+bindings = <&kp LPAR &kp RPAR &kp LEFT>;
+)
+
+// []
+ZMK_BEHAVIOR(bkt, macro,
+wait-ms = <100>;
+tap-ms = <5>;
+bindings = <&kp LBKT &kp RBKT &kp LEFT>;
+)
+
+// {}
+ZMK_BEHAVIOR(brc, macro,
+wait-ms = <100>;
+tap-ms = <5>;
+bindings = <&kp LBRC &kp RBRC &kp LEFT>;
 )
 
 // combos
@@ -91,7 +114,7 @@ ZMK_LAYER(home,
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &none         &hml LCTRL A  &hml LALT S   &hml LSHIFT D &hml LGUI F   &kp G             &kp H         &hmr RGUI J   &hmr RSHIFT K &hmr RALT L   &hmr RCTRL SEMI AS(APOS)
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┤
-    &none         &kp Z         &kp X         &kp C         &kp V         &kp B             &kp N         &kp M         AS(COMMA)     AS(&kp DOT)   &cmnt         AS(BSLH)
+    &none         &kp Z         &kp X         &kp C         &kp V         &kp B             &kp N         &kp M         AS(COMMA)     AS(DOT)       &cmnt         AS(BSLH)
 // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
                                               &kp DEL       &lt NAV BSPC  &lt NUM SPACE     &lt NUM RET   &lt NAV TAB   AS(EQUAL)
 //                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
@@ -99,11 +122,11 @@ ZMK_LAYER(home,
 
 ZMK_LAYER(nav,
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-    &mt TLD GRV   &none         &kp HOME      &kp UP        &kp END       &kp LBKT          &kp RBKT      &none         &none         &none         &none         &none
+    &mt TLD GRV   &none         &kp HOME      &kp UP        &kp END       &bkt              &kp RBKT      &none         &none         &none         &none         &none
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &kp F2        &kp LSHIFT       &kp LEFT      &kp DOWN      &kp RIGHT     &kp LPAR          &kp RPAR      &hmr hr_dn    &hmr hr_up    &trans        &trans        &none
+    &kp F2        &kp LSHIFT    &kp LEFT      &kp DOWN      &kp RIGHT     &par              &kp RPAR      &hmr hr_dn    &hmr hr_up    &trans        &trans        &none
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &kp LS(F6)    &trans        &trans        &trans        &trans        &kp LBRC          &kp RBRC      &trans        &trans        &trans        &trans        &none
+    &kp LS(F6)    &trans        &trans        &trans        &trans        &brc              &kp RBRC      &trans        &trans        &trans        &trans        &none
 // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
                                               ___           ___           ___               ___           ___           ___
 //                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
